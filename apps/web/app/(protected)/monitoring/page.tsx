@@ -40,7 +40,8 @@ export default function MonitoringPage() {
   ];
 
   return (
-    <div className="p-4 ml-6 mr-6">
+    <div className="p-4 ml-6 mr-6 flex flex-col gap-8">
+      <div className=''> 
       <div className="flex flex-row items-center justify-left gap-2 ">
         {isApiUp ? (
           <div className="bg-primary rounded-[50%] w-12 h-12 animate-pulse">
@@ -98,6 +99,32 @@ export default function MonitoringPage() {
           <p className="text-gray-500">Uptime graph will go here</p>
         </div>
       </div> */}
+      </div>
+      <div className='flex flex-col w-full bg-gray-800  gap-1  pt-8 p-10 rounded-lg'> 
+        <p className="text-gray-200">Uptime stats</p> 
+          <div className='flex flex-col lg:flex-row mt-2  '> 
+                <div className="flex flex-col w-full mb-6 lg:mb-0 border-b border-gray-700 lg:border-b-0 lg:border-r lg:border-r-gray-700">
+                  <p className="text-gray-200">Last 24 hrs</p> 
+                  <h1 className={`text-2xl font-bold ${isApiUp ? "text-primary" : "text-red-500"}`}>100%</h1>
+                  <p className="text-gray-400 text-sm">0 incidents, 0 m down</p>
+                </div>
+                  <div className="flex flex-col lg:border-r lg:border-r-gray-700 w-full lg:ml-6 mb-6 lg:mb-0 border-b border-gray-700 lg:border-b-0 ">
+                  <p className="text-gray-200">Last 7 days</p>
+                  <h1 className={`text-2xl font-bold ${isApiUp ? "text-primary" : "text-red-500"}`}>98.88%</h1>
+                  <p className="text-gray-400 text-sm">2 incidents, 36 m down</p>
+                </div>
+                  <div className="flex flex-col lg:border-r lg:border-r-gray-700 w-full lg:ml-6 mb-6 lg:mb-0 border-b border-gray-700 lg:border-b-0 ">
+                  <p className="text-gray-200">Last 30 days</p>
+                  <h1 className={`text-2xl font-bold ${isApiUp ? "text-primary" : "text-red-500"}`}>92%</h1>
+                  <p className="text-gray-400 text-sm">5 incidents, 1h 12m down</p>
+                </div>
+                  <div className="flex flex-col w-full lg:ml-6 ">
+                    <p className="text-gray-200 text-sm bg-land-primary rounded-md pl-2 pr-2 w-fit">Dec 15 22" - May 16 23"</p>
+                    <h1 className={`text-2xl font-bold ${isApiUp ? "text-primary" : "text-red-500"}`}>.....%</h1>
+                    <p className="text-gray-400 text-sm">Upgrade Now</p>
+                  </div>
+           </div>
+         </div>  
     </div>
   );
 }
