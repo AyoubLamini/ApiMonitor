@@ -162,3 +162,14 @@
     @apply font-sans;
   }
 }
+
+.XAxis, .YAxis {
+ outline: none !important;
+}
+
+svg:focus {
+  outline: none !important;
+}
+* {
+  user-select: none;
+}
