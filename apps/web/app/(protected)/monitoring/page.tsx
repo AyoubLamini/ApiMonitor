@@ -1,10 +1,11 @@
 "use client";
 
 // import { ArrowUp } from 'lucide-react';
-import {ShieldCheck, ShieldAlert, ArrowDownToLine, ArrowUpToLine, ArrowDownUp  } from 'lucide-react';
+import {ShieldCheck, ShieldAlert, ArrowDownToLine, ArrowUpToLine, ArrowDownUp, Bell, Settings  } from 'lucide-react';
 import { useState } from 'react';
 import { is } from 'zod/v4/locales';
 import { Card, CardHeader, CardContent, CardFooter } from '@/app/Components/ui/card';
+import { Button } from '@/app/Components/ui/button';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 
@@ -92,10 +93,12 @@ export default function MonitoringPage() {
 ];
 
   return (
-    <div className="p-4 ml-6 mr-6 flex flex-col gap-8">
-      <div className=''> 
-      <div className="flex flex-row items-center justify-left gap-2 ">
-        {isApiUp ? (
+
+      <div className='w-full'>
+        <header className='pl-2'>
+          <div className="flex flex-row items-center justify-between gap-2 ">
+        <div className='flex flex-row items-center gap-3'>
+          {isApiUp ? (
           <div className="bg-primary rounded-[50%] w-12 h-12 animate-pulse">
             <ShieldCheck className="text-black relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" size={20} />
           </div>
@@ -112,8 +115,18 @@ export default function MonitoringPage() {
             <span className="text-xs pl-2 pr-2 pt-1 pb-1   text-slate-300 border border-gray-700 rounded bg-gray-800">Server Europe</span>
           </div>
       </div> 
+        </div>
+        <div className="flex flex-row gap-2">
+          <Button size="xs" className='bg-gray-800 text-gray-300 hover:bg-gray-700 cursor-pointer'> <Bell className="" size={16} /> Test notification</Button>
+          <Button size="xs" className='bg-gray-800 text-gray-300 hover:bg-gray-700 cursor-pointer'> <Settings className="" size={16} /> Edit</Button>
+        </div>
       </div>
-      <div className="mt-6 flex  justify-between gap-10 flex-col lg:flex-row">
+      </header>
+
+    <main className="w-full pl-2 flex flex-col lg:flex-row gap-10">
+      <section className="w-full lg:w-[calc(82vw-16rem)] flex flex-col gap-7">
+      <div className=''> 
+      <div className="mt-6 flex justify-between gap-10 flex-col lg:flex-row">
         <div className="w-full   bg-gray-800 rounded-lg flex flex-col gap-1 pt-8 p-10">
           <p className="text-gray-200">Current status</p>
           <h1 className={`text-2xl font-bold ${isApiUp ? "text-primary" : "text-red-500"}`}>{status}</h1>
@@ -130,13 +143,13 @@ export default function MonitoringPage() {
          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMinYMid meet">
             {last24Hours.map((entry, index) => (
               <rect
-                key={index}
-                x={index * 40}
-                y={0}
-                width="25"
-                height="80"
-                fill={entry.status === "Up" ? "var(--primary)" : "#ef4444"}
-                rx="10"
+              key={index}
+              x={index * 40}
+              y={0}
+              width="25"
+              height="80"
+              fill={entry.status === "Up" ? "var(--primary)" : "#ef4444"}
+              rx="10"
               />
               
             ))}
@@ -148,10 +161,15 @@ export default function MonitoringPage() {
       {/* <div className="mt-6">
         <h2 className="text-2xl text-white font-semibold mb-4">Uptime</h2>
         <div className="w-full h-64 bg-gray-800 rounded-lg flex items-center justify-center">
-          <p className="text-gray-500">Uptime graph will go here</p>
+        <p className="text-gray-500">Uptime graph will go here</p>
         </div>
-      </div> */}
+        </div> */}
       </div>
+
+
+
+
+
       <div className='flex flex-col w-full bg-gray-800  gap-1  pt-8 p-10 rounded-lg'> 
         <p className="text-gray-200 font-bold">Uptime stats</p> 
           <div className='flex flex-col lg:flex-row mt-2  '> 
@@ -177,7 +195,10 @@ export default function MonitoringPage() {
                   </div>
            </div>
          </div>
-         <div className="flex flex-col border bg-gray-800 rounded-lg gap-1 pt-8 p-10">
+
+
+
+         <div className="flex flex-col  bg-gray-800 rounded-lg gap-1 pt-8 pb-4 p-10">
           <div className='flex flex-row justify-between'>
               <p className="text-gray-200 font-bold">Response time</p> 
               <p className="text-gray-200 font-bold  bg-land-primary rounded-md pl-2 pr-2 w-fit">Last 30 days</p> 
@@ -191,7 +212,7 @@ export default function MonitoringPage() {
                        <CartesianGrid 
                         stroke="#374151"
                         vertical={false}   // remove vertical lines
-                      />
+                        />
                       <XAxis tabIndex={-1}
                         axisLine={false}   // remove X axis line
                         tickLine={false}   // remove tick lines
@@ -199,7 +220,7 @@ export default function MonitoringPage() {
                         // tickCount={5} // 5 levels (not working)
                         tickFormatter={formatXAxisTick}
                         style={{ fontSize: '12px', outline : 'none' }}  
-                      />
+                        />
                       <YAxis  tabIndex={-1} 
                         // tickCount={4} // 3–4 response levels
                         ticks={[10, 805, 1600]}
@@ -207,7 +228,7 @@ export default function MonitoringPage() {
                         axisLine={false}   //  remove Y axis line
                         tickLine={false}   //  remove tick lines
                         style={{ fontSize: '12px', outline : 'none' }} 
-                      />
+                        />
                       {/* <Tooltip /> */}
                       <Line type="monotone" dataKey="responseTime" strokeWidth={1.5} stroke="#21c45d" dot={false} />
                     </LineChart>
@@ -217,21 +238,21 @@ export default function MonitoringPage() {
                   <div className='w-full'>
                     <div className='flex flex-row items-center gap-1'>
                     <ArrowDownUp className='inline text-gray-500'/>
-                    <p className="text-lg font-bold mt-2">101.6 ms</p>
+                    <p className="text-lg font-bold mt-2 text-white">101.6 ms</p>
                     </div>
                     <span className='text-gray-400 text-sm'>Average</span>
                   </div>
                   <div className='w-full'>
                      <div className='flex flex-row items-center gap-1'>
                         <ArrowDownToLine className='inline text-primary'/>
-                        <p className="text-lg font-bold mt-2">16.67 ms</p>
+                        <p className="text-lg font-bold text-white mt-2">16.67 ms</p>
                      </div>
                     <span className='text-gray-400 text-sm'>Minimum</span>
                   </div>
                   <div className='w-full'>
                       <div className='flex flex-row items-center gap-1'>
                         <ArrowUpToLine className='inline text-red-500'/>
-                        <p className="text-lg font-bold mt-2">1546.12 ms</p>
+                        <p className="text-lg font-bold text-white mt-2">1546.12 ms</p>
                       </div>
                     <span className='text-gray-400 text-sm'>Maximum</span>
                   </div>
@@ -239,6 +260,70 @@ export default function MonitoringPage() {
               </div>
             </div>
           </div>  
+    </section>
+   <aside className="flex-1 mt-6 flex flex-col gap-6">
+      <div className="w-full bg-gray-800 rounded-lg p-4 pb-6 flex flex-col gap-2">
+        <p className="text-gray-200 font-bold text-sm ">Domain & SSL cert </p>
+        <div className="flex flex-row items-center gap-2">
+          <ShieldCheck className="text-primary" size={16} />
+          <p className="text-gray-400 text-sm">Valid SSL certificate</p>
+        </div>
+        <div className="flex flex-row items-center gap-2">
+          <ShieldCheck className="text-primary" size={16} />
+          <p className="text-gray-400 text-sm">Domain expires in 120 days</p>
+          </div>
+        </div>
+        <div className="w-full bg-gray-800 rounded-lg p-4 pb-6 flex flex-col gap-3">
+        <p className="text-gray-200 font-bold text-sm ">Incidents summary </p>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-red-500/90"></span>
+              <span className="text-gray-400 text-sm">Hard Down</span>
+            </div>
+            <span className="text-red-400 font-semibold text-sm">3</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-500/90"></span>
+              <span className="text-gray-400 text-sm">Soft Down</span>
+            </div>
+            <span className="text-amber-400 font-semibold text-sm">7</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+              <span className="text-gray-400 text-sm">Degraded performance</span>
+            </div>
+            <span className="text-yellow-400/80 font-semibold text-sm">12</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-sky-500/80"></span>
+              <span className="text-gray-400 text-sm">Partial outage</span>
+            </div>
+            <span className="text-sky-400/80 font-semibold text-sm">5</span>
+          </div>
+        </div>
+        <div className="border-t border-gray-700 pt-3 flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <span className="text-gray-400 text-sm">Ongoing</span>
+            <span className="text-red-400 font-semibold text-sm">2</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-gray-400 text-sm">Resolved</span>
+            <span className="text-primary font-semibold text-sm">25</span>
+          </div>
+        </div>
+        </div>
+        </aside>
+    </main>
     </div>
+
+
+
+
+
+
   );
 }
