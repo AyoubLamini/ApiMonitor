@@ -13,7 +13,7 @@ export default function ProtectedLayout({
       <AppSidebar />
       <main className="flex-1 min-h-screen bg-land-primary">
         <div className="flex items-center gap-2 px-4 py-3">
-          {/* <SidebarTrigger /> */}
+          <SidebarTrigger />
         </div>
         <div className="p-6">{children}</div>
       </main>

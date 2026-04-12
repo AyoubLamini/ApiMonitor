@@ -7,6 +7,7 @@ import { is } from 'zod/v4/locales';
 import { Card, CardHeader, CardContent, CardFooter } from '@/app/Components/ui/card';
 import { Button } from '@/app/Components/ui/button';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import  DatePicker  from '@/app/(protected)/Components/date-picker';
 
 
 
@@ -123,21 +124,21 @@ export default function MonitoringPage() {
       </div>
       </header>
 
-    <main className="w-full pl-2 flex flex-col lg:flex-row gap-10">
-      <section className="w-full lg:w-[calc(82vw-16rem)] flex flex-col gap-7">
+    <main className="w-full flex flex-col lg:flex-row gap-6 xl:gap-8 lg:gap-4">
+      <section className="w-full lg:w-[calc(82vw-16rem)] flex flex-col gap-7 transition-all duration-300 ease-in-out ">
       <div className=''> 
-      <div className="mt-6 flex justify-between gap-10 flex-col lg:flex-row">
-        <div className="w-full   bg-gray-800 rounded-lg flex flex-col gap-1 pt-8 p-10">
+      <div className="mt-6 flex justify-between gap-6 xl:gap-8 lg:gap-4 flex-col lg:flex-row  transition-all duration-300 ease-in-out">
+        <div className="w-full  bg-gray-800 rounded-lg flex flex-col gap-1 pt-8 p-10 lg:p-8  transition-all duration-300 ease-in-out ">
           <p className="text-gray-200">Current status</p>
-          <h1 className={`text-2xl font-bold ${isApiUp ? "text-primary" : "text-red-500"}`}>{status}</h1>
-          <p className="text-gray-400 text-sm">Currently {status} for 5d, 4h, 22m</p>
+          <h1 className={`text-lg lg:text-sm xl:text-2xl font-bold  transition-all duration-300 ease-in-out ${isApiUp ? "text-primary" : "text-red-500"}`}>{status}</h1>
+          <p className="text-gray-400 lg:text-xs xl:text-sm  transition-all duration-300 ease-in-out">Currently {status} for 5d, 4h, 22m</p>
         </div>
-        <div className="w-full   bg-gray-800 rounded-lg flex flex-col gap-1 pt-8 p-10">
+        <div className="w-full   bg-gray-800 rounded-lg flex flex-col gap-1 pt-8 p-10 lg:p-8  transition-all duration-300 ease-in-out">
           <p className="text-gray-200">Last check</p>
-          <h1 className={`text-2xl text-white font-bold`}>26 seconds ago</h1>
-          <p className="text-gray-400 text-sm">Checked every 2 minutes</p>
+          <h1 className={`text-lg lg:text-sm xl:text-2xl text-white font-bold transition-all duration-300 ease-in-out`}>26 seconds ago</h1>
+          <p className="text-gray-400 lg:text-xs xl:text-sm  transition-all duration-300 ease-in-out">Checked every 2 minutes</p>
         </div>
-         <div className="w-full bg-gray-800 rounded-lg flex flex-col gap-1 pt-8 p-10">
+         <div className="w-full bg-gray-800 rounded-lg flex flex-col gap-1 pt-8 p-10 lg:p-8  transition-all duration-300 ease-in-out " >
           <p className="text-gray-200">Last 24 hrs</p>
         <div className="w-full h-7">
          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMinYMid meet">
@@ -155,7 +156,7 @@ export default function MonitoringPage() {
             ))}
           </svg>
           </div>
-          <p className="text-gray-400 text-sm">2 incidents 12m downtime</p>
+          <p className="text-gray-400 lg:text-xs xl:text-sm">2 incidents 12m downtime</p>
         </div>
       </div>
       {/* <div className="mt-6">
@@ -189,7 +190,12 @@ export default function MonitoringPage() {
                   <p className="text-gray-400 text-sm">5 incidents, 1h 12m down</p>
                 </div>
                   <div className="flex flex-col w-full lg:ml-6 ">
-                    <p className="text-gray-200 text-sm bg-land-primary rounded-md pl-2 pr-2 w-fit">Dec 15 '22 - May 16 '23</p>
+                    <div className='flex flex-row'>
+                        <DatePicker />
+                        <p className='ml-1 mr-1 text-gray-200'>to:</p>
+                        <DatePicker />
+                    </div>
+                    {/* <p className="text-gray-200 text-sm bg-land-primary rounded-md pl-2 pr-2 w-fit">Dec 15 '22 - May 16 '23</p> */}
                     <h1 className={`text-2xl font-bold ${isApiUp ? "text-primary" : "text-red-500"}`}>.....%</h1>
                     <p className="text-gray-400 text-sm">Upgrade Now</p>
                   </div>
@@ -201,7 +207,12 @@ export default function MonitoringPage() {
          <div className="flex flex-col  bg-gray-800 rounded-lg gap-1 pt-8 pb-4 p-10">
           <div className='flex flex-row justify-between'>
               <p className="text-gray-200 font-bold">Response time</p> 
-              <p className="text-gray-200 font-bold  bg-land-primary rounded-md pl-2 pr-2 w-fit">Last 30 days</p> 
+              <div className='flex flex-row'>
+                        <DatePicker />
+                        <p className='ml-1 mr-1 text-gray-200'>to:</p>
+                        <DatePicker />
+                    </div>
+              {/* <p className="text-gray-200 font-bold  bg-land-primary rounded-md pl-2 pr-2 w-fit">Last 30 days</p>  */}
           </div>
            
             <div className='flex flex-row w-full'>
