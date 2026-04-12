@@ -8,6 +8,7 @@ import { Card, CardHeader, CardContent, CardFooter } from '@/app/Components/ui/c
 import { Button } from '@/app/Components/ui/button';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import  DatePicker  from '@/app/(protected)/Components/date-picker';
+import { useSidebarStore } from "@/app/store/sidebar-store";
 
 
 
@@ -27,6 +28,8 @@ const formatYAxisTick = (value: any): string => {
 export default function MonitoringPage() {
   const [isApiUp, setIsApiUp] = useState<boolean>(true); 
   const [status, setStatus] = useState<"Up" | "Down">("Up");
+  const open = useSidebarStore((s) => s.open);
+  console.log(open);
 
   // Mock data
 
@@ -125,10 +128,10 @@ export default function MonitoringPage() {
       </header>
 
     <main className="w-full flex flex-col lg:flex-row gap-6 xl:gap-8 lg:gap-4">
-      <section className="w-full lg:w-[calc(82vw-16rem)] flex flex-col gap-7 transition-all duration-300 ease-in-out ">
+      <section className={`w-full  flex flex-col gap-7  ${open ? "lg:w-[calc(82vw-16rem)]" : "lg:w-[82vw]"}`}>
       <div className=''> 
-      <div className="mt-6 flex justify-between gap-6 xl:gap-8 lg:gap-4 flex-col lg:flex-row  transition-all duration-300 ease-in-out">
-        <div className="w-full  bg-gray-800 rounded-lg flex flex-col gap-1 pt-8 p-10 lg:p-8  transition-all duration-300 ease-in-out ">
+      <div className="mt-6 flex justify-between gap-6 xl:gap-8 lg:gap-4 flex-col lg:flex-row  ">
+        <div className="w-full  bg-gray-800 rounded-lg flex flex-col gap-1 pt-8 p-10 lg:p-8  ">
           <p className="text-gray-200">Current status</p>
           <h1 className={`text-lg lg:text-sm xl:text-2xl font-bold  transition-all duration-300 ease-in-out ${isApiUp ? "text-primary" : "text-red-500"}`}>{status}</h1>
           <p className="text-gray-400 lg:text-xs xl:text-sm  transition-all duration-300 ease-in-out">Currently {status} for 5d, 4h, 22m</p>
